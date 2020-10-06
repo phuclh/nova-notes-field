@@ -22,9 +22,9 @@ class NotesField extends Field
         parent::__construct($name, $attribute, $resolveCallback);
 
         $this->withMeta([
-            'placeholder' => null,
+            'placeholder'        => null,
             'addingNotesEnabled' => true,
-            'fullWidth' => config('nova-notes-field.full_width_inputs', false),
+            'fullWidth'          => config('nova-notes-field.full_width_inputs', false),
         ]);
     }
 
@@ -59,5 +59,16 @@ class NotesField extends Field
     public function fullWidth($fullWidth = true)
     {
         return $this->withMeta(['fullWidth' => $fullWidth]);
+    }
+
+    /**
+     * Enable or disable file upload.
+     *
+     * @param boolean $withFiles
+     * @return NotesField
+     **/
+    public function withFiles($withFiles = false)
+    {
+        return $this->withMeta(['withFiles' => $withFiles]);
     }
 }

@@ -6,6 +6,7 @@
         @keydown.stop
         @trix-change="$emit('input', $refs.trixEditor.value)"
         @trix-initialize="initialize"
+        @trix-file-accept="handleFileAccept"
         :value="value"
         :placeholder="placeholder"
         class="trix-content w-full form-control form-input form-input-bordered py-3 h-auto"
@@ -36,10 +37,15 @@
 
 <script>
 export default {
-  props: ['placeholder', 'value', 'loading', 'trixEnabled', 'fullWidth'],
+  props: ['placeholder', 'value', 'loading', 'trixEnabled', 'fullWidth', 'withFiles'],
   methods: {
     initialize() {
       this.$refs.trixEditor.editor.loadHTML(this.value);
+    },
+    handleFileAccept(e) {
+      if (!this.withFiles) {
+        e.preventDefault()
+      }
     },
   },
 

@@ -9,6 +9,7 @@
       :fullWidth="field.fullWidth"
       :placeholder="field.placeholder || __('novaNotesField.defaultPlaceholder')"
       :trixEnabled="trixEnabled"
+      :withFiles="field.withFiles"
     />
 
     <note
