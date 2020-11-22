@@ -25,7 +25,7 @@
       />
     </div>
 
-    <div class="whitespace-no-wrap ml-2">
+    <div v-if="!readonly" class="whitespace-no-wrap ml-2">
       <button
         class="btn btn-default btn-primary inline-flex items-center relative ml-auto"
         @click="$emit('onSubmit')"
