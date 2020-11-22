@@ -10,6 +10,7 @@
       :placeholder="field.placeholder || __('novaNotesField.defaultPlaceholder')"
       :trixEnabled="trixEnabled"
       :withFiles="field.withFiles"
+      :readonly="field.readonly"
     />
 
     <note

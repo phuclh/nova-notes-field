@@ -71,4 +71,15 @@ class NotesField extends Field
     {
         return $this->withMeta(['withFiles' => $withFiles]);
     }
+
+    /**
+     * Is readonly?
+     *
+     * @param boolean $readonly
+     * @return NotesField
+     **/
+    public function readonly($readonly = false)
+    {
+        return $this->withMeta(['readonly' => $readonly]);
+    }
 }

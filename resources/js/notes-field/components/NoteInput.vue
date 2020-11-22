@@ -1,27 +1,29 @@
 <template>
   <div class="mb-4 flex" :class="fullWidth ? 'w-full' : 'w-3/5'">
-    <div v-if="trixEnabled">
-      <trix-editor
-        ref="trixEditor"
-        @keydown.stop
-        @trix-change="$emit('input', $refs.trixEditor.value)"
-        @trix-initialize="initialize"
-        @trix-file-accept="handleFileAccept"
-        :value="value"
-        :placeholder="placeholder"
-        class="trix-content w-full form-control form-input form-input-bordered py-3 h-auto"
+    <div v-if="!readonly">
+      <div v-if="trixEnabled">
+        <trix-editor
+          ref="trixEditor"
+          @keydown.stop
+          @trix-change="$emit('input', $refs.trixEditor.value)"
+          @trix-initialize="initialize"
+          @trix-file-accept="handleFileAccept"
+          :value="value"
+          :placeholder="placeholder"
+          class="trix-content w-full form-control form-input form-input-bordered py-3 h-auto"
 
+        />
+      </div>
+
+      <textarea
+        v-else
+        rows="3"
+        :placeholder="placeholder"
+        class="form-control w-full form-input form-input-bordered py-3 h-auto"
+        v-bind:value="value"
+        v-on:input="$emit('input', $event.target.value)"
       />
     </div>
-
-    <textarea
-      v-else
-      rows="3"
-      :placeholder="placeholder"
-      class="form-control w-full form-input form-input-bordered py-3 h-auto"
-      v-bind:value="value"
-      v-on:input="$emit('input', $event.target.value)"
-    />
 
     <div class="whitespace-no-wrap ml-2">
       <button
@@ -37,7 +39,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'value', 'loading', 'trixEnabled', 'fullWidth', 'withFiles'],
+  props: ['placeholder', 'value', 'loading', 'trixEnabled', 'fullWidth', 'withFiles', 'readonly'],
   methods: {
     initialize() {
       this.$refs.trixEditor.editor.loadHTML(this.value);
